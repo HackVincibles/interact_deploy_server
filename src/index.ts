@@ -55,6 +55,9 @@ import { protect } from './middleware/auth';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust Railway/Vercel reverse proxy — required for rate-limiting and cookies to work correctly
+app.set('trust proxy', 1);
+
 // ─── Security middleware ─────────────────────────────────────────────────────
 app.use(helmet({
   contentSecurityPolicy: false,
