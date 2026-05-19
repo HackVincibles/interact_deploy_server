@@ -168,7 +168,7 @@ const connectDB = async () => {
 };
 
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT as number, '0.0.0.0', () => {
     console.log(`🚀 InteractAI Server v2.0 running on port ${PORT}`);
     console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🔗 Piston API: ${process.env.PISTON_API_URL || 'https://emkc.org/api/v2/piston'}`);
