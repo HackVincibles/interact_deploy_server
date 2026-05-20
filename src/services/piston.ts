@@ -135,7 +135,7 @@ const processPistonResult = (result: PistonResponse): CodeExecutionResult => {
   
   return {
     success: isSuccessful,
-    output: run.stdout.trim(),
+    output: (run.output || run.stdout || '').trim(),
     error: run.stderr ? run.stderr.trim() : undefined,
     status: isSuccessful ? 'Accepted' : 'Runtime Error',
     exitCode: run.code,
