@@ -16,7 +16,7 @@ const cookieOptions = {
   expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'lax' as const,
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' as const : 'lax' as const,
 };
 
 export const register = async (req: Request, res: Response) => {
@@ -56,7 +56,10 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const logout = (req: Request, res: Response) => {
-  res.cookie('session', 'none', { expires: new Date(Date.now() + 10 * 1000), httpOnly: true });
+  res.cookie('session', 'none', { 
+    ...cookieOptions,
+    expires: new Date(Date.now() + 10 * 1000)
+  });
   res.status(200).json({ success: true, message: 'Logged out' });
 };
 
